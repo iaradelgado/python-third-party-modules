@@ -29,11 +29,11 @@ except NameError:
 def clone_fragment(fragment):
     vector = read(here / 'pUCmu.gb')
     assert vector.seguid() == 'cdseguid=jEg2G-c5DZWICcghJ_xmafqcsTQ', 'checksum does not match.'
-    # +++your code here+++
-    return
-
-
-
+    fragments = vector.cut(HindIII, BamHI)
+    backbone = max(fragments, key=len)
+    left, insert, right = fragment.cut(HindIII, BamHI)
+    product = (backbone + insert).looped()
+    return product
 
 
 # Provided test helpers: leave these unchanged.
